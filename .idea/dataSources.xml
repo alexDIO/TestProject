@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1534176958">
+    <data-source source="LOCAL" name="hibernate.cfg.xml" uuid="7bbe618e-fef4-45b9-b485-007c4fc7f67d">
+      <jdbc-driver>com.sybase.jdbc4.jdbc.SybDriver</jdbc-driver>
+      <jdbc-url>jdbc:sybase:Tds:dio32:2638/IDAS_DEV</jdbc-url>
+      <user-name>AIFMD_DEV</user-name>
+      <user-password>dfebdfe3dfecdfe7dfeedff5dfeedfefdffcdf9bdf98df99df9edf8b</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
