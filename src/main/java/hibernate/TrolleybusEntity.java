@@ -9,5 +9,5 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("Trolleybus")
-public class TrolleybusEntity extends PassengerTransportEntity{
+public class TrolleybusEntity extends PassengerTransportEntity {
 }

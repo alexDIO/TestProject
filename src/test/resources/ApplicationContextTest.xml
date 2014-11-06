@@ -7,8 +7,6 @@
 
         default-lazy-init="true">
 
-    <context:component-scan base-package="forweb.webservices"/>
-
     <bean id="propertiesHolder" class="transport.TransportPropertiesHolder">
         <constructor-arg value="transport.properties"/>
     </bean>
@@ -73,78 +71,9 @@
         <constructor-arg index="0" ref="transportEntityFactory"/>
         <constructor-arg index="1" ref="transportFactory"/>
     </bean>
-    <bean id="storageTXT" class="transport.storages.TransportStorageTXT">
-        <constructor-arg ref="propertiesHolder"/>
-        <constructor-arg ref="converter"/>
-        <constructor-arg><bean class="java.util.Date"/> </constructor-arg>
-    </bean>
-    <bean id="storageCSV" class="transport.storages.TransportStorageCSV">
-        <constructor-arg ref="propertiesHolder"/>
-        <constructor-arg ref="converter"/>
-    </bean>
-    <bean id="storageXLS" class="transport.storages.TransportStorageXLS">
-        <constructor-arg ref="propertiesHolder"/>
-        <constructor-arg ref="converter"/>
-    </bean>
-    <bean id="storageDBAbstract" class="transport.storages.TransportStorageDBAbstract" abstract="true">
-        <constructor-arg ref="converter"/>
-    </bean>
-    <bean id="storageDB" class="transport.storages.TransportStorageDB">
-        <constructor-arg ref="propertiesHolder"/>
-        <constructor-arg ref="converter"/>
-    </bean>
-    <bean id="storageDBPrepared" class="transport.storages.TransportStorageDBPrepared">
-        <constructor-arg ref="propertiesHolder"/>
-        <constructor-arg ref="converter"/>
-    </bean>
-    <bean id="storageHibernate" class="transport.storages.TransportStorageHibernate">
-        <constructor-arg ref="converter"/>
-        <constructor-arg ref="manufacturers"/>
-    </bean>
-    <bean id="storageFactory" class="transport.storages.TransportStorageFactoryImpl">
-        <constructor-arg index="0" ref="propertiesHolder"/>
-        <constructor-arg index="1">
-            <map>
-                <entry key="txt" value-ref="storageTXT"/>
-                <entry key="csv" value-ref="storageCSV"/>
-                <entry key="xls" value-ref="storageXLS"/>
-                <entry key="db" value-ref="storageDB"/>
-                <entry key="db.prepared" value-ref="storageDBPrepared"/>
-                <entry key="hibernate" value-ref="storageHibernate"/>
-            </map>
-        </constructor-arg>
-    </bean>
     <bean id="mapHolder" class="forweb.TransportMapHolder">
         <constructor-arg ref="converter"/>
-        <constructor-arg ref="storageFactory"/>
+        <constructor-arg><bean class="transport.storages.TransportStorageFactoryMock"/></constructor-arg>
     </bean>
-    <bean id="databaseService" class="transport.DataBaseService">
-        <constructor-arg index="0">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getDriverSybase"/>
-        </constructor-arg>
-        <constructor-arg index="1">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getConnectionUrl"/>
-        </constructor-arg>
-        <constructor-arg index="2">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getConnectionLogin"/>
-        </constructor-arg>
-        <constructor-arg index="3">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getConnectionPassword"/>
-        </constructor-arg>
-        <constructor-arg index="4">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getSqlInsert"/>
-        </constructor-arg>
-        <constructor-arg index="5">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getSqlDelete"/>
-        </constructor-arg>
-        <constructor-arg index="6">
-            <bean class="java.lang.String" factory-bean="propertiesHolder" factory-method="getSqlSelect"/>
-        </constructor-arg>
-    </bean>
-
-    <bean id="manufacturers" class="transport.storages.ManufacturerStorage"/>
-
-    <!--<bean id="timeManagerSession" class="forweb.TimeManager" scope="session"/>-->
-    <!--<bean id="timeManagerSingleton" class="forweb.TimeManager" scope="singleton"/>-->
 
 </beans>

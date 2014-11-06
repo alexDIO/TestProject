@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import transport.classes.Transport;
 import transport.classes.TransportConverter;
 import transport.classes.TransportPojo;
@@ -18,8 +19,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* Created by olomakovskyi on 10/20/2014.
-*/
+ * Created by olomakovskyi on 10/20/2014.
+ */
 public class TransportStorageHibernate implements TransportStorage {
     private SessionFactory factory;
     private final TransportConverter converter;
@@ -48,7 +49,6 @@ public class TransportStorageHibernate implements TransportStorage {
         } finally {
             session.close();
         }
-
     }
 
     @Override
@@ -74,7 +74,6 @@ public class TransportStorageHibernate implements TransportStorage {
         List<TransportEntity> list = new ArrayList<>();
         Session session = factory.openSession();
         Transaction tx = null;
-
         try {
             list = session.createCriteria(TransportEntity.class).list();
         } catch (HibernateException e) {
@@ -85,11 +84,26 @@ public class TransportStorageHibernate implements TransportStorage {
         }
 
         for (TransportEntity elem : list) {
-            TransportPojo pojo = new TransportPojo(elem.getId(), elem.getTransportType(), elem.getMark().getDescription(), elem.getColor(), elem.getManufactureYear(), /*elem.getPassengersCount(),*/
-                    elem.getEnergySource()/*, elem.getTransmission(), elem.getLoad()*/);
-            resultMap.put(elem.getId(), converter.convertPojoToTransport(pojo));
+            resultMap.put(elem.getId(), converter.convertTransportEntityToTransport(elem));
         }
 
         return resultMap;
+    }
+
+    public void deleteTransportByMark(String inMark){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            ManufacturerEntity manufacturer = (ManufacturerEntity) session.get(ManufacturerEntity.class, inMark);
+            session.delete(manufacturer);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
     }
 }

@@ -24,27 +24,28 @@ public class ManufacturerStorage {
         factory = new Configuration().configure().buildSessionFactory();
     }
 
-    public Collection<Manufacturer> getAll(){
-        if (map == null){
-            fillMap();
-        }
+    public Collection<Manufacturer> getAll() {
+        fillMap();
+
         return map.values();
     }
 
-    public ManufacturerEntity getManufacturer(String description){
-        if (map == null){
+    public ManufacturerEntity getManufacturer(String description) {
+        if (map == null) {
             fillMap();
         }
         return mapEntity.get(description);
     }
 
-    private void fillMap(){
+    private void fillMap() {
         Session session = factory.openSession();
         Transaction tx = null;
         List<ManufacturerEntity> list = new ArrayList<>();
 
         try {
+            tx = session.beginTransaction();
             list = session.createCriteria(ManufacturerEntity.class).list();
+            tx.commit();
         } catch (HibernateException e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();

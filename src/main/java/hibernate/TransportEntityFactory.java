@@ -8,7 +8,7 @@ import java.util.Map;
 public class TransportEntityFactory {
     private Map<String, TransportEntity> map;
 
-    public TransportEntityFactory(Map<String, TransportEntity> map){
+    public TransportEntityFactory(Map<String, TransportEntity> map) {
         this.map = map;
     }
 

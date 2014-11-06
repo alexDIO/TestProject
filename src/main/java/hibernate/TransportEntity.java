@@ -1,6 +1,7 @@
 package hibernate;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by olomakovskyi on 10/20/2014.
@@ -13,7 +14,7 @@ import javax.persistence.*;
 })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "f_transportType", discriminatorType = DiscriminatorType.STRING)
-public abstract class TransportEntity {
+public abstract class TransportEntity implements Serializable{
     @Id
     @Column(name = "f_id")
     private int id;
@@ -22,7 +23,7 @@ public abstract class TransportEntity {
     private String transportType;
 
     @ManyToOne
-    @JoinColumn (name = "f_mark")
+    @JoinColumn(name = "f_mark")
     private ManufacturerEntity mark;
 
     @Column(name = "f_color")

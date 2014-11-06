@@ -14,13 +14,6 @@
 <%@ taglib prefix="tm" uri="/WEB-INF/transportManager.tld"%>
 <%@ taglib prefix="mf" uri="/WEB-INF/compareStrings.tld" %>
 
-<%--<%--%>
-<%--//    ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(pageContext.getServletContext());--%>
-<%--//    TimeManager timeManagerSession = (TimeManager) context.getBean("timeManagerSession");--%>
-<%--//    TimeManager timeManagerSingleton = (TimeManager) context.getBean("timeManagerSingleton");--%>
-<%--//    pageContext.setAttribute("timeManagerSession", timeManagerSession);--%>
-<%--//    pageContext.setAttribute("timeManagerSingleton", timeManagerSingleton);--%>
-<%--%>--%>
 <c:set var="buttonName" value="Add"/>
 
 <c:if test="${param['delete'] != null && param['curElemID'] != null}">
@@ -282,6 +275,11 @@
         <tr>
             <td>
                 <span>Application running during ${timeManagerSingleton.duration}</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="<c:url value="/mvc/crud"/>">Refresh</a>
             </td>
         </tr>
     </table>

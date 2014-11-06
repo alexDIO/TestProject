@@ -1,7 +1,6 @@
 package hibernate;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,14 +9,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "t_manufacturers", uniqueConstraints =
-        @UniqueConstraint(columnNames = "f_description")
+@UniqueConstraint(columnNames = "f_description")
 )
 public class ManufacturerEntity {
     @Id
-    @Column (name = "f_description", nullable = false)
+    @Column(name = "f_description", nullable = false)
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mark")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mark", cascade = CascadeType.REMOVE)
 
     private List<TransportEntity> entityList;
 

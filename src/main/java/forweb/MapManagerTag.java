@@ -68,7 +68,7 @@ public class MapManagerTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
 
-        switch (action){
+        switch (action) {
             case "delete":
                 holder.deleteTransport(id);
                 break;
@@ -78,6 +78,9 @@ public class MapManagerTag extends TagSupport {
             case "update":
                 holder.deleteTransport(id);
                 holder.addTransport(id, transportType, mark, color, manufactureYear, passengersCount, energySource, transmission, load);
+                break;
+            case "deleteByMark":
+                holder.deleteTransportByMark(mark);
                 break;
         }
 

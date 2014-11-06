@@ -8,11 +8,11 @@ import java.util.Date;
 public class TimeManager {
     private final Date startDate;
 
-    public TimeManager(){
+    public TimeManager() {
         this.startDate = new Date();
     }
 
-    public String getDuration(){
+    public String getDuration() {
         Date currentDate = new Date();
         long diff = currentDate.getTime() - startDate.getTime();
         long diffMilliSeconds = diff % 1000;
@@ -21,15 +21,15 @@ public class TimeManager {
         long diffHours = diff / (60 * 60 * 1000) % 24;
 
         StringBuilder builder = new StringBuilder();
-        if (diffHours > 0){
+        if (diffHours > 0) {
             builder.append(diffHours);
             builder.append(" hours ");
         }
-        if (diffMinutes > 0){
+        if (diffMinutes > 0) {
             builder.append(diffMinutes);
             builder.append(" minutes ");
         }
-        if (diffSeconds > 0){
+        if (diffSeconds > 0) {
             builder.append(diffSeconds);
             builder.append(" seconds ");
         }

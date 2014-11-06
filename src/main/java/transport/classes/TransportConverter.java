@@ -190,4 +190,25 @@ public class TransportConverter{
         return resultTransport;
     }
 
+    public Transport convertTransportEntityToTransport(TransportEntity inEntity){
+        Transport resultTransport = transportFactory.getTransport(inEntity.getTransportType());
+
+        resultTransport.setId(inEntity.getId());
+        resultTransport.setMark(inEntity.getMark().getDescription());
+        resultTransport.setColor(inEntity.getColor());
+        resultTransport.setManufactureYear(inEntity.getManufactureYear());
+        resultTransport.setEnergySource(inEntity.getEnergySource());
+        if (inEntity instanceof PassengerTransportEntity) {
+            ((PassengerTransport) resultTransport).setPassengersCount(((PassengerTransportEntity) inEntity).getPassengersCount());
+            if (inEntity instanceof PassengerCarEntity) {
+                ((PassengerCar) resultTransport).setTransmission(((PassengerCarEntity) inEntity).getTransmission());
+            }
+        } else {
+            ((Truck) resultTransport).setLoad(((TruckEntity)inEntity).getLoad());
+        }
+
+        return resultTransport;
+
+    }
+
 }

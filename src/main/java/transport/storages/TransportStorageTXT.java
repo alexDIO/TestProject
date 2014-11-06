@@ -16,7 +16,7 @@ public class TransportStorageTXT implements TransportStorage {
     private final TransportPropertiesHolder propertiesHolder;
     private final TransportConverter converter;
 
-    public TransportStorageTXT(TransportPropertiesHolder propertiesHolder,TransportConverter converter , Date creationDate){
+    public TransportStorageTXT(TransportPropertiesHolder propertiesHolder, TransportConverter converter, Date creationDate) {
         this.propertiesHolder = propertiesHolder;
         this.converter = converter;
         System.out.println(String.format("Storage was created at %s", creationDate));

@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
-* Created by olomakovskyi on 9/11/2014.
-*/
+ * Created by olomakovskyi on 9/11/2014.
+ */
 public class TransportStorageDBPrepared extends TransportStorageDBAbstract {
     private final TransportPropertiesHolder propertiesHolder;
     private final TransportConverter converter;
